@@ -1,0 +1,19 @@
+[Default Applications]
+inode/directory=yazi.desktop
+image/x-farbfeld=swayimg.desktop
+image/tiff=swayimg.desktop
+image/tiff-fx=swayimg.desktop
+image/png=swayimg.desktop
+image/x-png=swayimg.desktop
+image/jpeg=swayimg.desktop
+image/jpg=swayimg.desktop
+image/pjpeg=swayimg.desktop
+image/svg+xml=swayimg.desktop
+image/gif=swayimg.desktop
+image/bmp=swayimg.desktop
+image/x-bmp=swayimg.desktop
+image/heif=swayimg.desktop
+image/avif=swayimg.desktop
+image/jxl=swayimg.desktop
+image/webp=swayimg.desktop
+image/qoi=swayimg.desktop

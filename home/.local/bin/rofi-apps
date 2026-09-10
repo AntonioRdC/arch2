@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if pgrep -x rofi >/dev/null; then
+    pkill -x rofi
+    exit 0
+fi
+
+wallpaper_link="$HOME/.cache/rofi/current-wallpaper"
+app_background="$HOME/.cache/rofi/apps-background.jpg"
+if [[ -e "$wallpaper_link" && ( ! -f "$app_background" || "$(readlink -f "$wallpaper_link")" -nt "$app_background" ) ]]; then
+    mkdir -p "$HOME/.cache/rofi"
+    magick "$(readlink -f "$wallpaper_link")" \
+        -auto-orient -strip -thumbnail '1920x1200^' \
+        -gravity center -extent 1920x1200 -quality 85 \
+        "$app_background" || true
+fi
+
+exec rofi -show drun -theme "$HOME/.config/rofi/apps.rasi"

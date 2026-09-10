@@ -1,0 +1,12 @@
+{
+  "workbench.startupEditor": "none",
+  "explorer.confirmDelete": false,
+  "chat.disableAIFeatures": true,
+  "editor.fontFamily": "'JetbrainsMono Nerd Font','Maple Mono', monospace",
+  "workbench.colorTheme": "Catppuccin Macchiato",
+  "workbench.iconTheme": "catppuccin-macchiato",
+  "window.titleBarStyle": "native",
+  "window.customTitleBarVisibility": "never",
+  "window.menuBarVisibility": "hidden",
+  "workbench.layoutControl.enabled": false
+}

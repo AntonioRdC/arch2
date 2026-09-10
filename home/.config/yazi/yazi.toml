@@ -1,0 +1,31 @@
+[mgr]
+ratio = [1, 4, 3]
+sort_by = "natural"
+sort_sensitive = false
+sort_dir_first = true
+show_hidden = false
+show_symlink = true
+linemode = "size"
+scrolloff = 5
+
+[opener]
+wine = [
+    { run = "wine %s1", orphan = true, desc = "Abrir com Wine", for = "unix" },
+]
+image = [
+    { run = "swayimg %s", orphan = true, desc = "Abrir no swayimg", for = "unix" },
+]
+media = [
+    { run = "mpv -- %s", orphan = true, desc = "Abrir no mpv", for = "unix" },
+]
+pdf = [
+    { run = "zathura %s", orphan = true, desc = "Abrir no Zathura", for = "unix" },
+]
+
+[open]
+prepend_rules = [
+    { url = "*.exe", use = "wine" },
+    { mime = "application/pdf", use = "pdf" },
+    { mime = "image/*", use = "image" },
+    { mime = "{audio,video}/*", use = "media" },
+]

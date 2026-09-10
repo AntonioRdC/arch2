@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+sensor="${1:?sensor name required}"
+for hwmon in /sys/class/hwmon/hwmon*; do
+    [[ -r "$hwmon/name" ]] || continue
+    [[ "$(<"$hwmon/name")" == "alienware_wmi" ]] || continue
+    case "$sensor" in
+        cpu) input="$hwmon/temp1_input"; icon="󰍛" ;;
+        gpu) input="$hwmon/temp2_input"; icon="󰢮" ;;
+        *) exit 2 ;;
+    esac
+    [[ -r "$input" ]] || exit 1
+    printf '%s %d°C\n' "$icon" "$(( $(<"$input") / 1000 ))"
+    exit 0
+done
+exit 1

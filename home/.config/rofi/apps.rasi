@@ -1,0 +1,81 @@
+configuration {
+    modi: "drun";
+    show-icons: true;
+    drun-display-format: "{name}";
+    font: "JetBrainsMono Nerd Font 10";
+    icon-theme: "Tela-circle-dracula";
+}
+
+@theme "catppuccin-mocha"
+
+window {
+    width: 63em;
+    height: 33em;
+    transparency: "real";
+    border: 2px;
+    border-radius: 24px;
+    border-color: @mauve;
+    background-color: @base;
+}
+
+mainbox {
+    orientation: horizontal;
+    children: [ dummywall, listbox ];
+    background-color: transparent;
+}
+
+dummywall {
+    width: 37em;
+    expand: false;
+    children: [ inputbar ];
+    background-color: transparent;
+    background-image: url("~/.cache/rofi/apps-background.jpg", height);
+}
+
+inputbar {
+    children: [ entry ];
+    background-color: transparent;
+}
+
+entry { enabled: false; }
+
+listbox {
+    padding: 2em;
+    children: [ listview ];
+    background-color: transparent;
+}
+
+listview {
+    columns: 1;
+    lines: 10;
+    cycle: true;
+    scrollbar: false;
+    fixed-height: false;
+    expand: true;
+    background-color: transparent;
+    text-color: @text;
+}
+
+element {
+    spacing: 0.8em;
+    padding: 0.4em 0.4em 0.4em 1.5em;
+    border-radius: 12px;
+    background-color: transparent;
+    text-color: @text;
+}
+
+element selected.normal {
+    background-color: @mauve;
+    text-color: @crust;
+}
+
+element-icon {
+    size: 2.8em;
+    background-color: transparent;
+}
+
+element-text {
+    vertical-align: 0.5;
+    background-color: transparent;
+    text-color: inherit;
+}

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+theme="$HOME/.config/rofi/power.rasi"
+choice="$(printf '%s\n' \
+    '󰐥  Desligar' \
+    '󰜉  Reiniciar' \
+    '󰒲  Suspender' \
+    '󰍃  Sair da sessão' \
+    '󰌍  Cancelar' | rofi -dmenu -i -p 'Energia' -theme "$theme")" || exit 0
+
+case "$choice" in
+    '󰐥  Desligar') exec hyprshutdown --post-cmd 'systemctl poweroff' ;;
+    '󰜉  Reiniciar') exec hyprshutdown --post-cmd 'systemctl reboot' ;;
+    '󰒲  Suspender') exec systemctl suspend ;;
+    '󰍃  Sair da sessão') exec hyprshutdown ;;
+    *) exit 0 ;;
+esac

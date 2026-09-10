@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+device='ven_06cb:00-06cb:cff1-touchpad'
+runtime_dir="${XDG_RUNTIME_DIR:-/run/user/$UID}"
+state_file="$runtime_dir/ant-touchpad-disabled"
+
+if [[ -e "$state_file" ]]; then
+    hyprctl eval "hl.device({ name = '$device', enabled = true })" >/dev/null
+    rm -f "$state_file"
+else
+    hyprctl eval "hl.device({ name = '$device', enabled = false })" >/dev/null
+    : > "$state_file"
+fi

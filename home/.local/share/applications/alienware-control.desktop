@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Alienware Control
+Comment=Cor, brilho e restauração da iluminação do teclado
+Exec=/home/ant/.local/bin/alienware-control
+Icon=alienware-control
+Terminal=false
+Categories=Settings;HardwareSettings;
+Keywords=Alienware;Dell;RGB;teclado;iluminação;keyboard;
+StartupNotify=true

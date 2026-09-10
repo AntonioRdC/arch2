@@ -1,0 +1,130 @@
+@import "themes/mocha.css";
+
+@define-color bar-bg #11111b;
+@define-color main-fg @text;
+@define-color wb-act-bg @lavender;
+@define-color wb-act-fg @crust;
+* {
+    font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "Noto Color Emoji", sans-serif;
+    background-color: transparent;
+    font-weight: 600;
+    font-size: 12px;
+    min-height: 0;
+    border: none;
+}
+
+window#waybar {
+    background: @bar-bg;
+    color: @main-fg;
+}
+
+.module {
+    border-radius: 10px;
+    color: @main-fg;
+}
+
+#pill {
+    background-color: transparent;
+    padding: 0 0.9em;
+    margin: 0;
+}
+
+#workspaces,
+#custom-arch,
+#clock,
+#cpu,
+#custom-cpu-temp,
+#custom-gpu-temp,
+#memory,
+#backlight,
+#pulseaudio,
+#tray,
+#battery {
+    padding: 0 0.45em;
+    margin: 0 0.25em;
+}
+
+#workspaces {
+    padding: 0;
+}
+
+#custom-arch {
+    color: @pink;
+    padding-left: 0.8em;
+    padding-right: 1.1em;
+}
+
+#workspaces button,
+#workspaces button:hover {
+    background: transparent;
+    color: @main-fg;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0 0.65em;
+    margin: 0.35em 0.08em;
+    transition: none;
+}
+
+#workspaces button.active,
+#workspaces button.active:hover {
+    background: @wb-act-bg;
+    color: @wb-act-fg;
+}
+
+#cpu {
+    color: @peach;
+}
+
+#custom-cpu-temp {
+    color: @red;
+}
+
+#custom-gpu-temp {
+    color: @mauve;
+}
+
+#memory {
+    color: @green;
+}
+
+#clock {
+    color: @lavender;
+}
+
+#backlight {
+    color: @yellow;
+}
+
+#pulseaudio {
+    color: @green;
+}
+
+#pulseaudio.muted {
+    color: @red;
+}
+
+#battery {
+    color: @teal;
+}
+
+#battery.warning {
+    color: @yellow;
+}
+
+#battery.critical {
+    color: @red;
+}
+
+#tray menu {
+    background: @base;
+    color: @text;
+    padding: 6px;
+}
+
+#tray menuitem {
+    min-height: 10px;
+}
+
+#tray menuitem:hover {
+    background: alpha(@lavender, 0.18);
+}

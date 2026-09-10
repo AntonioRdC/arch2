@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+wall_dir="$HOME/Pictures/Wallpaper"
+cache_dir="$HOME/.cache/rofi/wallpapers"
+mkdir -p "$cache_dir"
+
+mapfile -d '' walls < <(find "$wall_dir" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \) -print0 | sort -z)
+((${#walls[@]})) || exit 0
+
+entries=()
+for wall in "${walls[@]}"; do
+    name="$(basename "$wall")"
+    key="$(printf '%s' "$wall" | sha256sum | cut -d' ' -f1)"
+    thumb="$cache_dir/$key.square.jpg"
+    if [[ ! -f "$thumb" || "$wall" -nt "$thumb" ]]; then
+        magick "$wall" -auto-orient -strip -thumbnail '500x500^' -gravity center -extent 500x500 "$thumb"
+    fi
+    entries+=("$name\0icon\x1f$thumb")
+done
+
+index="$(printf '%b\n' "${entries[@]}" | rofi -dmenu -i -show-icons -p '󰸉  Wallpaper' -format i -theme "$HOME/.config/rofi/wallpaper.rasi")" || exit 0
+[[ "$index" =~ ^[0-9]+$ ]] || exit 0
+selected="${walls[$index]}"
+
+mkdir -p "$HOME/.cache/rofi"
+ln -sfn "$selected" "$HOME/.cache/rofi/current-wallpaper"
+magick "$selected" \
+    -auto-orient -strip -thumbnail '1920x1200^' \
+    -gravity center -extent 1920x1200 -quality 85 \
+    "$HOME/.cache/rofi/apps-background.jpg"
+awww img "$selected" --resize crop --transition-type grow --transition-duration 1.2 --transition-fps 60

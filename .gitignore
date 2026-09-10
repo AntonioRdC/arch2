@@ -1,0 +1,54 @@
+# Dados gerados pelo ambiente
+.cache/
+home/.cache/
+home/.config/Code - OSS/*Cache*/
+home/.config/Code - OSS/Cookies*
+home/.config/Code - OSS/Crashpad/
+home/.config/Code - OSS/History/
+home/.config/Code - OSS/Local Storage/
+home/.config/Code - OSS/Session Storage/
+home/.config/Code - OSS/Shared Dictionary/
+home/.config/Code - OSS/SharedStorage/
+home/.config/Code - OSS/Trust Tokens*
+home/.config/Code - OSS/logs/
+home/.config/Code - OSS/workspaceStorage/
+home/.config/Code - OSS/Local State
+home/.config/Code - OSS/Network Persistent State
+home/.config/Code - OSS/Preferences
+home/.config/Code - OSS/machineid
+home/.config/mozilla/
+home/.config/nvm/
+home/.config/pulse/
+home/.config/spotify/
+home/.config/dconf/user
+home/.config/**/pavucontrol.ini
+home/.config/**/prefs.js
+home/.config/**/cookies.sqlite*
+home/.config/**/places.sqlite*
+
+# Históricos, estado e cópias temporárias
+home/.bash_history
+home/.zsh_history
+home/.zcompdump*
+home/.config/**/history*
+home/.config/**/session*
+home/.config/**/*.bak*
+home/.config/**/*.tmp
+home/.local/share/applications/mimeinfo.cache
+
+# Bytecode e artefatos de compilação
+**/__pycache__/
+*.py[cod]
+*.so
+*.o
+*.a
+*.core
+core
+
+# Segredos e credenciais
+*.pem
+*.key
+*.token
+*.secret
+home/.config/pulse/cookie
+home/.config/spotify/

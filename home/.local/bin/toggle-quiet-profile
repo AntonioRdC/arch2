@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Do not overlap lighting transactions if the key is pressed rapidly.
+exec 9>"${XDG_RUNTIME_DIR:-/tmp}/alienware-quiet-${UID}.lock"
+flock -n 9 || exit 0
+
+if ! result="$("$HOME/.local/bin/alien-light" quiet-toggle 2>&1)"; then
+    notify-send -u critical 'Alienware' "$result" || true
+    exit 1
+fi
+case "$(powerprofilesctl get)" in
+    power-saver) message='Perfil silencioso · teclado branco' ;;
+    *) message='Perfil equilibrado' ;;
+esac
+
+notify-send -t 2000 -h string:x-canonical-private-synchronous:alienware-power \
+    'Alienware' "$message" || true

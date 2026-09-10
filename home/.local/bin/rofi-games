@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cache_dir="$HOME/.cache/rofi/steam-covers"
+theme="$HOME/.config/rofi/games.rasi"
+mkdir -p "$cache_dir"
+
+declare -a roots=()
+for root in "$HOME/.local/share/Steam" "$HOME/.steam/steam" "$HOME/.steam/root"; do
+    [[ -d "$root" ]] && roots+=("$root")
+done
+
+for root in "${roots[@]}"; do
+    library_file="$root/steamapps/libraryfolders.vdf"
+    [[ -f "$library_file" ]] || continue
+    while IFS= read -r path; do
+        [[ -d "$path" ]] && roots+=("$path")
+    done < <(sed -nE 's/^[[:space:]]*"path"[[:space:]]+"([^"]+)".*/\1/p' "$library_file" | sed 's#\\\\#\\#g')
+done
+
+declare -A seen=()
+declare -a appids=()
+declare -a names=()
+declare -a icons=()
+
+for root in "${roots[@]}"; do
+    while IFS= read -r -d '' manifest; do
+        appid="$(sed -nE 's/^[[:space:]]*"appid"[[:space:]]+"([0-9]+)".*/\1/p' "$manifest" | head -1)"
+        name="$(sed -nE 's/^[[:space:]]*"name"[[:space:]]+"(.*)".*/\1/p' "$manifest" | head -1)"
+        [[ -n "$appid" && -n "$name" && -z "${seen[$appid]:-}" ]] || continue
+        case "$name" in
+            Steam\ Linux\ Runtime*|Steamworks\ Common\ Redistributables|Proton*) continue ;;
+        esac
+        seen[$appid]=1
+        appids+=("$appid")
+        names+=("$name")
+        cover="$cache_dir/$appid.jpg"
+        if [[ ! -s "$cover" ]]; then
+            curl -fsSL --max-time 8 "https://steamcdn-a.akamaihd.net/steam/apps/$appid/library_600x900_2x.jpg" -o "$cover" 2>/dev/null || rm -f "$cover"
+        fi
+        icons+=("$cover")
+    done < <(find "$root/steamapps" -maxdepth 1 -type f -name 'appmanifest_*.acf' -print0 2>/dev/null)
+done
+
+((${#names[@]})) || exit 0
+
+mapfile -t order < <(for i in "${!names[@]}"; do printf '%s\t%s\n' "${names[$i]}" "$i"; done | sort -f | cut -f2)
+entries=()
+for i in "${order[@]}"; do
+    if [[ -s "${icons[$i]}" ]]; then
+        entries+=("${names[$i]}\0icon\x1f${icons[$i]}")
+    else
+        entries+=("${names[$i]}")
+    fi
+done
+
+selected="$(printf '%b\n' "${entries[@]}" | rofi -dmenu -i -show-icons -p 'Jogos' -format i -theme "$theme")" || exit 0
+[[ "$selected" =~ ^[0-9]+$ ]] || exit 0
+index="${order[$selected]}"
+exec steam -applaunch "${appids[$index]}"

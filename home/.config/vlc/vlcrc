@@ -1,0 +1,5 @@
+[qt]
+qt-minimal-view=1
+qt-privacy-ask=0
+
+avcodec-hw=vaapi_drm

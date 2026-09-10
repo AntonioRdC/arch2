@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+"""Entry point shared by the terminal, F7, session service and Qt app."""
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path.home() / ".local/lib/alienware-control"))
+from control import main
+
+sys.exit(main())

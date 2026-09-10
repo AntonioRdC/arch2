@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+current="$(powerprofilesctl get)"
+case "$current" in
+    performance)
+        powerprofilesctl set balanced
+        profile='balanced'
+        ;;
+    *)
+        powerprofilesctl set performance
+        profile='performance'
+        ;;
+esac

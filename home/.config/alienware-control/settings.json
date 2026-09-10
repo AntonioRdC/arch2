@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "color": "FFFFFF",
+  "brightness": 100,
+  "enabled": true,
+  "restore_on_login": true,
+  "effect": "color"
+}

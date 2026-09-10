@@ -1,0 +1,13 @@
+[Unit]
+Description=Restore the selected wallpaper
+PartOf=graphical-session.target
+After=awww-daemon.service
+Requires=awww-daemon.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'i=0; while [ "$i" -lt 20 ]; do /usr/bin/awww query >/dev/null 2>&1 && exec /usr/bin/awww img "%h/.cache/rofi/current-wallpaper" --resize crop --transition-type none; i=$((i + 1)); sleep 0.1; done; exit 1'
+
+[Install]
+WantedBy=graphical-session.target
+

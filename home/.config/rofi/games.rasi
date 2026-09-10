@@ -1,0 +1,72 @@
+configuration {
+    font: "JetBrainsMono Nerd Font 10";
+    show-icons: true;
+}
+
+@theme "catppuccin-mocha"
+
+window {
+    width: 54em;
+    height: 32em;
+    border: 2px;
+    border-radius: 24px;
+    border-color: @mauve;
+    background-color: @base;
+}
+
+mainbox {
+    padding: 1.2em;
+    children: [ inputbar, listview ];
+    background-color: transparent;
+}
+
+inputbar {
+    padding: 0.6em 0.8em;
+    border-radius: 12px;
+    background-color: @surface0;
+    text-color: @text;
+}
+
+prompt {
+    text-color: @mauve;
+}
+
+entry {
+    text-color: @text;
+}
+
+listview {
+    margin: 1em 0 0;
+    lines: 7;
+    columns: 2;
+    spacing: 0.8em;
+    scrollbar: false;
+    fixed-height: false;
+    expand: true;
+    background-color: transparent;
+}
+
+element {
+    orientation: horizontal;
+    spacing: 0.8em;
+    padding: 0.5em;
+    border-radius: 12px;
+    background-color: @surface0;
+    text-color: @text;
+}
+
+element selected {
+    background-color: @mauve;
+    text-color: @crust;
+}
+
+element-icon {
+    size: 3.5em;
+    background-color: transparent;
+}
+
+element-text {
+    vertical-align: 0.5;
+    background-color: transparent;
+    text-color: inherit;
+}

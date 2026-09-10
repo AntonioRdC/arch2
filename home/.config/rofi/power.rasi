@@ -1,0 +1,49 @@
+configuration {
+    font: "JetBrainsMono Nerd Font 11";
+    show-icons: false;
+}
+
+@theme "catppuccin-mocha"
+
+window {
+    width: 28em;
+    border: 2px;
+    border-radius: 24px;
+    border-color: @mauve;
+    background-color: @base;
+}
+
+mainbox {
+    padding: 1.2em;
+    children: [ inputbar, listview ];
+    background-color: transparent;
+}
+
+inputbar {
+    enabled: false;
+}
+
+listview {
+    lines: 5;
+    columns: 1;
+    spacing: 0.5em;
+    scrollbar: false;
+    background-color: transparent;
+}
+
+element {
+    padding: 0.8em 1em;
+    border-radius: 12px;
+    background-color: transparent;
+    text-color: @text;
+}
+
+element selected {
+    background-color: @mauve;
+    text-color: @crust;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+}

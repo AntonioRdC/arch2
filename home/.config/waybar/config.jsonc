@@ -1,0 +1,164 @@
+{
+  "layer": "top",
+  "position": "top",
+  "output": [
+    "*"
+  ],
+  "height": 30,
+  "exclusive": true,
+  "reload_style_on_change": true,
+  "modules-left": [
+    "group/pill#left1",
+    "group/pill#left2"
+  ],
+  "modules-center": [
+    "group/pill#center"
+  ],
+  "modules-right": [
+    "group/pill#right1",
+    "group/pill#right2"
+  ],
+  "group/pill#left1": {
+    "orientation": "inherit",
+    "modules": [
+      "cpu",
+      "custom/cpu-temp",
+      "custom/gpu-temp",
+      "memory"
+    ]
+  },
+  "group/pill#left2": {
+    "orientation": "inherit",
+    "modules": [
+      "clock"
+    ]
+  },
+  "group/pill#center": {
+    "orientation": "inherit",
+    "modules": [
+      "custom/arch",
+      "hyprland/workspaces"
+    ]
+  },
+  "group/pill#right1": {
+    "orientation": "inherit",
+    "modules": [
+      "backlight",
+      "pulseaudio"
+    ]
+  },
+  "group/pill#right2": {
+    "orientation": "inherit",
+    "modules": [
+      "tray",
+      "battery"
+    ]
+  },
+  "cpu": {
+    "interval": 10,
+    "format": "󰍛 {usage}%",
+    "tooltip": false
+  },
+  "memory": {
+    "interval": 10,
+    "format": "󰾆 {used}GB",
+    "tooltip": false
+  },
+  "custom/cpu-temp": {
+    "interval": 5,
+    "exec": "waybar-temp cpu",
+    "format": "{}",
+    "tooltip": false
+  },
+  "custom/gpu-temp": {
+    "interval": 5,
+    "exec": "waybar-temp gpu",
+    "format": "{}",
+    "tooltip": false
+  },
+  "clock": {
+    "format": "{:%R 󰃭 %d/%m/%y}",
+    "tooltip": false
+  },
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "cursor": 68,
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace -1",
+    "on-scroll-down": "hyprctl dispatch workspace +1"
+  },
+  "custom/arch": {
+    "format": "",
+    "tooltip": false
+  },
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "on-scroll-up": "brightnessctl -e4 -n2 set 5%+",
+    "on-scroll-down": "brightnessctl -e4 -n2 set 5%-",
+    "min-length": 6,
+    "tooltip": false
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol -t 3",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "tooltip": false
+  },
+  "tray": {
+    "spacing": 5,
+    "tooltip": false
+  },
+  "battery": {
+    "bat": "BAT0",
+    "adapter": "AC",
+    "format": "{icon}",
+    "format-charging": "󰂄",
+    "format-plugged": "󰚥",
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "tooltip": false
+  }
+}

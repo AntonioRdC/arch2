@@ -1,0 +1,6 @@
+#!/bin/sh
+exec env \
+    LOCPATH="$HOME/.local/share/wine-japanese/locale${LOCPATH:+:$LOCPATH}" \
+    LANG=ja_JP.UTF-8 \
+    LC_ALL=ja_JP.UTF-8 \
+    /usr/bin/wine "$@"
